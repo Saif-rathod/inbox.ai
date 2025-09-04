@@ -1,14 +1,24 @@
-FROM node:18-alpine as frontend-build
+FROM node:18 as frontend-build
 
 # Build frontend
 WORKDIR /app/frontend
+
+# Copy package files first for better caching
 COPY frontend/package*.json ./
-RUN npm install
+
+# Install dependencies with verbose logging
+RUN npm install --verbose
+
+# Copy all frontend files
 COPY frontend/ ./
+
 # Set build-time environment variables
 ENV NEXT_TELEMETRY_DISABLED=1
 ENV NODE_ENV=production
-RUN npm run build
+ENV NEXT_PUBLIC_API_URL=http://localhost:8000
+
+# Build with error handling
+RUN npm run build || (echo "Build failed, listing files:" && ls -la && cat package.json && exit 1)
 
 # Python backend
 FROM python:3.11-slim
