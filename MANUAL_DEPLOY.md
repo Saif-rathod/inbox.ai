@@ -11,14 +11,16 @@ Deploy InboxPrism frontend and backend separately for maximum reliability.
 1. **Connect Repository**: `Saif-rathod/inbox.ai`
 2. **Service Type**: Web Service
 3. **Configuration**:
+
    ```
    Name: inbox-ai-backend
    Runtime: Python 3
-   Build Command: pip install -r backend/requirements.txt && pip install -r requirements.txt
+   Build Command: pip install -r backend/requirements.txt
    Start Command: cd backend && python -m uvicorn api.main:app --host 0.0.0.0 --port $PORT
    ```
 
 4. **Environment Variables**:
+
    ```
    GOOGLE_API_KEY=your_google_api_key
    AZURE_OPENAI_API_KEY=your_azure_openai_key
@@ -42,6 +44,7 @@ Deploy InboxPrism frontend and backend separately for maximum reliability.
 2. **Framework**: Next.js (auto-detected)
 3. **Root Directory**: `frontend`
 4. **Build Settings**:
+
    ```
    Build Command: npm run build
    Output Directory: dist
@@ -49,10 +52,12 @@ Deploy InboxPrism frontend and backend separately for maximum reliability.
    ```
 
 5. **Environment Variables**:
+
    ```
    NEXT_PUBLIC_API_URL=https://your-backend-name.onrender.com
    ```
-   *(Replace with your actual Render backend URL)*
+
+   _(Replace with your actual Render backend URL)_
 
 6. **Deploy!** ✅
 
@@ -65,15 +70,16 @@ Deploy InboxPrism frontend and backend separately for maximum reliability.
 
 ## 📈 Benefits of Manual Deployment
 
-✅ **Faster Deployment**: No Docker build time  
-✅ **Better Debugging**: Clear error messages  
-✅ **Platform Optimized**: Uses native platform features  
-✅ **Easier Updates**: Simple git push deployments  
-✅ **Cost Effective**: Better resource utilization  
+✅ **Faster Deployment**: No Docker build time
+✅ **Better Debugging**: Clear error messages
+✅ **Platform Optimized**: Uses native platform features
+✅ **Easier Updates**: Simple git push deployments
+✅ **Cost Effective**: Better resource utilization
 
 ## 🎯 Final URLs
 
 After deployment:
+
 - **Frontend**: `https://your-frontend.vercel.app`
 - **Backend API**: `https://your-backend.onrender.com`
 - **API Docs**: `https://your-backend.onrender.com/docs`
@@ -82,6 +88,7 @@ After deployment:
 ## 🔧 Troubleshooting
 
 If you encounter issues:
+
 1. Check build logs in Render/Vercel dashboards
 2. Verify environment variables are set correctly
 3. Ensure CORS is properly configured
