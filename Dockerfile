@@ -8,8 +8,6 @@ COPY frontend/ ./
 # Set build-time environment variables
 ENV NEXT_TELEMETRY_DISABLED=1
 ENV NODE_ENV=production
-# Debug: Check if files are copied correctly
-RUN ls -la
 RUN npm run build
 
 # Python backend
