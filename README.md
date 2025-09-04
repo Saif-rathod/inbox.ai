@@ -278,15 +278,19 @@ InboxPrism/
 
 **Frontend (.env.local):**
 ```
+
 NEXT_PUBLIC_API_URL=https://your-backend.onrender.com
+
 ```
 
 **Backend (Render):**
 ```
+
 AZURE_OPENAI_API_KEY=your_azure_key
 AZURE_OPENAI_ENDPOINT=https://your-resource.openai.azure.com/
 GOOGLE_API_KEY=your_google_key
 DATABASE_URL=postgresql://user:pass@host:port/db
+
 ```
 
 ## 🤝 Contributing

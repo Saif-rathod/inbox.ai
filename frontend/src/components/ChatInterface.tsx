@@ -41,11 +41,11 @@ const generateEnhancedResponse = (message: string, emails: Email[]): string => {
   if (lowerMessage.includes('how many') && lowerMessage.includes('email')) {
     const total = emails.length
     const summarized = emails.filter(e => e.summary).length
-    const actionRequired = emails.filter(e => 
+    const actionRequired = emails.filter(e =>
       e.summary?.action_required?.toLowerCase().includes('yes') ||
       e.summary?.action_required?.toLowerCase().includes('action')
     ).length
-    
+
     return `📊 **Email Overview:**
 • **Total emails:** ${total}
 • **Summarized:** ${summarized}
@@ -60,15 +60,15 @@ ${total > 0 ? "Would you like me to show you the emails that need your attention
       e.summary?.action_required?.toLowerCase().includes('yes') ||
       e.summary?.action_required?.toLowerCase().includes('action')
     )
-    
+
     if (actionEmails.length === 0) {
       return `✅ **Great news!** No emails require immediate action right now. You're all caught up!`
     }
-    
-    const emailList = actionEmails.slice(0, 3).map(e => 
+
+    const emailList = actionEmails.slice(0, 3).map(e =>
       `• **"${e.subject}"** from ${e.sender}`
     ).join('\n')
-    
+
     return `⚡ **${actionEmails.length} emails need your attention:**
 
 ${emailList}
@@ -85,13 +85,13 @@ Would you like me to summarize any of these emails for you?`
       const emailDate = new Date(e.received_at)
       return emailDate.toDateString() === today.toDateString()
     })
-    
+
     if (todayEmails.length === 0) {
       return `📭 **No new emails today!** You can focus on other tasks. 🎯`
     }
-    
+
     const senders = [...new Set(todayEmails.map(e => e.sender))].slice(0, 3)
-    
+
     return `📅 **Today's email summary:**
 • **${todayEmails.length} new emails** received
 • **Top senders:** ${senders.join(', ')}
@@ -106,10 +106,10 @@ Would you like me to prioritize them for you?`
     if (recentEmails.length === 0) {
       return `📝 No emails to summarize right now. Your inbox is empty!`
     }
-    
+
     return `📝 **Recent email summaries:**
 
-${recentEmails.map((e, i) => 
+${recentEmails.map((e, i) =>
   `${i + 1}. **${e.subject}** (${e.sender})
    ${e.summary?.key_points || 'Not yet summarized'}`
 ).join('\n\n')}
@@ -123,13 +123,13 @@ Would you like more details about any of these emails?`
       acc[e.sender] = (acc[e.sender] || 0) + 1
       return acc
     }, {} as Record<string, number>)
-    
+
     const topSenders = Object.entries(senderCounts)
       .sort(([,a], [,b]) => b - a)
       .slice(0, 5)
       .map(([sender, count]) => `• **${sender}** (${count} emails)`)
       .join('\n')
-    
+
     return `👥 **Top email senders:**
 
 ${topSenders}
@@ -142,7 +142,7 @@ Want me to show emails from a specific sender?`
     return `👋 **Hello there!** I'm your AI email assistant. I can help you:
 
 🔍 **Analyze** your emails and find important ones
-📊 **Summarize** email content and key points  
+📊 **Summarize** email content and key points
 ⚡ **Identify** emails that need action
 📅 **Review** today's or recent emails
 👥 **Filter** emails by sender
@@ -235,8 +235,8 @@ export default function ChatInterface() {
   }
 
   const handleFeedback = (messageId: string, feedback: 'like' | 'dislike') => {
-    setMessages(prev => prev.map(msg => 
-      msg.id === messageId 
+    setMessages(prev => prev.map(msg =>
+      msg.id === messageId
         ? { ...msg, feedback: msg.feedback === feedback ? null : feedback }
         : msg
     ))
@@ -244,7 +244,7 @@ export default function ChatInterface() {
 
   const regenerateResponse = async (userMessage: string) => {
     setIsProcessing(true)
-    
+
     setTimeout(() => {
       const response = generateEnhancedResponse(userMessage, emailData?.emails || [])
       const assistantMessage: Message = {
@@ -261,12 +261,12 @@ export default function ChatInterface() {
   const typeMessage = async (response: string) => {
     const words = response.split(' ')
     setTypingMessage('')
-    
+
     for (let i = 0; i < words.length; i++) {
       await new Promise(resolve => setTimeout(resolve, 50 + Math.random() * 100))
       setTypingMessage(words.slice(0, i + 1).join(' '))
     }
-    
+
     const assistantMessage: Message = {
       id: Date.now().toString(),
       type: 'assistant',
@@ -371,7 +371,7 @@ export default function ChatInterface() {
                         : 'dark-glass text-gray-300 border border-white/10'
                     }`}
                   >
-                    <div 
+                    <div
                       className="text-sm leading-relaxed"
                       dangerouslySetInnerHTML={{
                         __html: message.content
@@ -391,7 +391,7 @@ export default function ChatInterface() {
                       })}
                     </p>
                   </div>
-                  
+
                   {/* Message Actions */}
                   {message.type === 'assistant' && (
                     <div className="flex items-center gap-2 px-2">
@@ -413,8 +413,8 @@ export default function ChatInterface() {
                         <button
                           onClick={() => handleFeedback(message.id, 'like')}
                           className={`p-1 rounded transition-colors ${
-                            message.feedback === 'like' 
-                              ? 'text-green-400' 
+                            message.feedback === 'like'
+                              ? 'text-green-400'
                               : 'text-gray-500 hover:text-green-400'
                           }`}
                           title="Good response"
@@ -424,8 +424,8 @@ export default function ChatInterface() {
                         <button
                           onClick={() => handleFeedback(message.id, 'dislike')}
                           className={`p-1 rounded transition-colors ${
-                            message.feedback === 'dislike' 
-                              ? 'text-red-400' 
+                            message.feedback === 'dislike'
+                              ? 'text-red-400'
                               : 'text-gray-500 hover:text-red-400'
                           }`}
                           title="Poor response"
@@ -448,7 +448,7 @@ export default function ChatInterface() {
                   <Bot className="w-5 h-5" />
                 </div>
                 <div className="p-4 rounded-2xl dark-glass text-gray-300 border border-white/10">
-                  <div 
+                  <div
                     className="text-sm leading-relaxed"
                     dangerouslySetInnerHTML={{
                       __html: typingMessage
@@ -551,7 +551,7 @@ export default function ChatInterface() {
                 </button>
               ))}
             </div>
-            
+
             {/* Conversation Starters */}
             <div className="flex flex-wrap gap-2">
               <span className="text-xs text-gray-500 mr-2">💡 Try asking:</span>
