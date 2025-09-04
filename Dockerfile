@@ -3,8 +3,13 @@ FROM node:18-alpine as frontend-build
 # Build frontend
 WORKDIR /app/frontend
 COPY frontend/package*.json ./
-RUN npm ci --only=production
+RUN npm install
 COPY frontend/ ./
+# Set build-time environment variables
+ENV NEXT_TELEMETRY_DISABLED=1
+ENV NODE_ENV=production
+# Debug: Check if files are copied correctly
+RUN ls -la
 RUN npm run build
 
 # Python backend
