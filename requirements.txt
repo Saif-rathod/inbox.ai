@@ -1,4 +1,5 @@
 google-api-python-client
+uvicorn
 google-auth-httplib2
 google-auth-oauthlib
 google-generativeai
@@ -6,3 +7,13 @@ colorama
 python-dotenv
 langchain
 langchain-openai
+fastapi>=0.104.0
+pydantic>=2.0.0
+pydantic-settings>=2.0.0
+python-multipart
+google-api-python-client
+google-auth-oauthlib
+langchain
+langchain-openai
+python-dotenv
+colorama

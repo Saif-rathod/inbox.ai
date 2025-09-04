@@ -16,7 +16,7 @@ Deploy InboxPrism frontend and backend separately for maximum reliability.
    Name: inbox-ai-backend
    Runtime: Python 3
    Build Command: pip install -r backend/requirements.txt
-   Start Command: cd backend && python -m uvicorn api.main:app --host 0.0.0.0 --port $PORT
+   Start Command: uvicorn backend.api.main:app --host 0.0.0.0 --port $PORT
    ```
 
 4. **Environment Variables**:
@@ -86,6 +86,23 @@ After deployment:
 - **Health Check**: `https://your-backend.onrender.com/health`
 
 ## 🔧 Troubleshooting
+
+### Backend Issues (Render)
+
+If backend deployment fails:
+
+1. **Check Logs**: Go to Render dashboard → Your service → "Logs" tab
+2. **Common Issues**:
+   - **Module not found**: Ensure all required `__init__.py` files exist
+   - **uvicorn not found**: Verify `backend/requirements.txt` has `uvicorn[standard]>=0.24.0`
+   - **Import errors**: Try alternative start command: `cd backend && python -m uvicorn api.main:app --host 0.0.0.0 --port $PORT`
+   - **Path issues**: Ensure the build installs from correct requirements file
+
+3. **Alternative Configurations**:
+   - **Build Command**: `cd backend && pip install -r requirements.txt`
+   - **Start Command**: `cd backend && python -m uvicorn api.main:app --host 0.0.0.0 --port $PORT`
+
+### Frontend Issues (Vercel)
 
 If you encounter issues:
 
