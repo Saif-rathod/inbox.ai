@@ -13,7 +13,5 @@ pydantic-settings>=2.0.0
 python-multipart
 google-api-python-client
 google-auth-oauthlib
-langchain
-langchain-openai
 python-dotenv
 colorama

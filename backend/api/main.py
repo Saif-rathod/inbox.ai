@@ -1,7 +1,6 @@
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
-from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel
 from typing import List, Dict, Optional
 import logging
@@ -54,11 +53,6 @@ class EmailSummary(BaseModel):
 @app.get("/")
 async def root():
     return {"message": "InboxPrism API", "status": "running"}
-
-@app.get("/health")
-async def health_check():
-    """Health check endpoint for Docker and monitoring"""
-    return {"status": "healthy", "service": "InboxPrism API"}
 
 @app.get("/api/stats")
 async def get_stats():
@@ -166,9 +160,6 @@ async def summarize_email(email_id: int):
     except Exception as e:
         logger.error(f"Error summarizing email {email_id}: {e}")
         raise HTTPException(status_code=500, detail=str(e))
-
-# Serve frontend files
-app.mount("/", StaticFiles(directory="static", html=True), name="static")
 
 if __name__ == "__main__":
     import uvicorn

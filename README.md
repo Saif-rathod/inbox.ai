@@ -252,47 +252,6 @@ InboxPrism/
 - Database statistics dashboard
 - AI provider usage metrics
 
-## 🚀 Deployment
-
-### Frontend (Vercel)
-
-1. Fork/clone this repository
-2. Connect your Vercel account to GitHub
-3. Import the project and set root directory to `frontend/`
-4. Add environment variable: `NEXT_PUBLIC_API_URL` (your backend URL)
-5. Deploy automatically
-
-### Backend (Render)
-
-1. Connect your Render account to GitHub
-2. Create a new Web Service
-3. Use the `render.yaml` configuration
-4. Set environment variables:
-   - `AZURE_OPENAI_API_KEY`
-   - `AZURE_OPENAI_ENDPOINT`
-   - `GOOGLE_API_KEY` (optional)
-   - `DATABASE_URL` (for PostgreSQL, optional)
-5. Deploy automatically
-
-### Environment Variables
-
-**Frontend (.env.local):**
-```
-
-NEXT_PUBLIC_API_URL=https://your-backend.onrender.com
-
-```
-
-**Backend (Render):**
-```
-
-AZURE_OPENAI_API_KEY=your_azure_key
-AZURE_OPENAI_ENDPOINT=https://your-resource.openai.azure.com/
-GOOGLE_API_KEY=your_google_key
-DATABASE_URL=postgresql://user:pass@host:port/db
-
-```
-
 ## 🤝 Contributing
 
 1. Fork the repository
