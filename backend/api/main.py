@@ -54,6 +54,11 @@ class EmailSummary(BaseModel):
 async def root():
     return {"message": "InboxPrism API", "status": "running"}
 
+@app.get("/health")
+async def health_check():
+    """Health check endpoint for Docker and monitoring"""
+    return {"status": "healthy", "service": "InboxPrism API"}
+
 @app.get("/api/stats")
 async def get_stats():
     """Get email statistics"""
