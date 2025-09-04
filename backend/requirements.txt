@@ -11,5 +11,4 @@ colorama
 google-generativeai
 langchain
 langchain-openai
-python-multipart
 
