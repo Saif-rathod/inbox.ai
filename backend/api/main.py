@@ -27,10 +27,10 @@ app = FastAPI(title="InboxPrism API", version="1.0.0")
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
-        "http://localhost:3000", 
+        "http://localhost:3000",
         "http://localhost:5173",  # Local dev servers
         "https://*.vercel.app",   # Vercel deployments
-        "https://your-app.vercel.app"  # Replace with your actual Vercel URL
+        "https://your-actual-app.vercel.app"  # Replace with your actual Vercel URL
     ],
     allow_credentials=True,
     allow_methods=["*"],

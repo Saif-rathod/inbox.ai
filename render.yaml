@@ -11,11 +11,11 @@ services:
       - key: PYTHON_VERSION
         value: "3.11.0"
       - key: GOOGLE_API_KEY
-        sync: false  # You'll set this manually in Render dashboard
+        sync: false # You'll set this manually in Render dashboard
       - key: AZURE_OPENAI_API_KEY
-        sync: false  # You'll set this manually in Render dashboard
+        sync: false # You'll set this manually in Render dashboard
       - key: AZURE_OPENAI_ENDPOINT
-        sync: false  # You'll set this manually in Render dashboard
+        sync: false # You'll set this manually in Render dashboard
       - key: LOG_LEVEL
         value: "INFO"
     healthCheckPath: /health
