@@ -26,7 +26,12 @@ app = FastAPI(title="InboxPrism API", version="1.0.0")
 # CORS middleware
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:3000", "http://localhost:5173"],  # React/Vite dev servers
+    allow_origins=[
+        "http://localhost:3000", 
+        "http://localhost:5173",  # Local dev servers
+        "https://*.vercel.app",   # Vercel deployments
+        "https://your-app.vercel.app"  # Replace with your actual Vercel URL
+    ],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -36,6 +41,11 @@ app.add_middleware(
 db = DatabaseManager(settings.database_path)
 gmail_service = GmailService(settings.gmail_credentials_path, settings.gmail_token_path)
 ai_service = AIService()
+
+# Health check endpoint for Render
+@app.get("/health")
+async def health_check():
+    return {"status": "healthy", "service": "InboxPrism API"}
 
 class FetchEmailsRequest(BaseModel):
     hours: Optional[int] = 24

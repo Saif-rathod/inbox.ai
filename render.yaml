@@ -1,0 +1,21 @@
+services:
+  - type: web
+    name: emailagent-backend
+    env: python
+    region: oregon
+    plan: free
+    rootDir: ./backend
+    buildCommand: "pip install -r requirements.txt"
+    startCommand: "uvicorn api.main:app --host 0.0.0.0 --port $PORT"
+    envVars:
+      - key: PYTHON_VERSION
+        value: "3.11.0"
+      - key: GOOGLE_API_KEY
+        sync: false  # You'll set this manually in Render dashboard
+      - key: AZURE_OPENAI_API_KEY
+        sync: false  # You'll set this manually in Render dashboard
+      - key: AZURE_OPENAI_ENDPOINT
+        sync: false  # You'll set this manually in Render dashboard
+      - key: LOG_LEVEL
+        value: "INFO"
+    healthCheckPath: /health
