@@ -29,9 +29,8 @@ app.add_middleware(
     allow_origins=[
         "http://localhost:3000",
         "http://localhost:5173",  # Local dev servers
-        "https://*.vercel.app",   # Vercel deployments
-        "https://inboxai-tech.netlify.app",  # Your Netlify site
-        "https://*.netlify.app"   # All Netlify deployments
+        "https://inboxai-tech.netlify.app",  # Primary Netlify deployment
+        "https://*.netlify.app"   # Netlify staging/preview deployments
     ],
     allow_credentials=True,
     allow_methods=["*"],
