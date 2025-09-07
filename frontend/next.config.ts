@@ -13,12 +13,12 @@ const nextConfig: NextConfig = {
       ...config.resolve.alias,
       '@': path.resolve('./src'),
     }
-    
+
     // Add fallback for module resolution
     config.resolve.fallback = {
       ...config.resolve.fallback,
     }
-    
+
     return config
   }
 };
