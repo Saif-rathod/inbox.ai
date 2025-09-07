@@ -10,9 +10,7 @@ const nextConfig = {
     return config;
   },
   // Enable experimental features for better TypeScript support
-  experimental: {
-    typedRoutes: true,
-  },
+  typedRoutes: true,
   // Configure for deployment
   output: 'standalone',
   // Environment variables
