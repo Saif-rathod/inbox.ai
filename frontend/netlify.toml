@@ -6,6 +6,7 @@
   NEXT_PUBLIC_API_URL = "https://inbox-ai.onrender.com"
   NODE_VERSION = "18"
   NPM_FLAGS = "--legacy-peer-deps"
+  NODE_ENV = "production"
 
 # Backend URL: https://inbox-ai.onrender.com
 # Frontend URL: https://inboxai-tech.netlify.app
