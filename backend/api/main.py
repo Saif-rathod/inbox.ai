@@ -32,6 +32,7 @@ app.add_middleware(
         "https://inboxai-tech.netlify.app",  # Primary Netlify deployment
         "https://*.netlify.app",   # Netlify staging/preview deployments
         "https://*.vercel.app",    # Vercel deployments
+        "https://inbox-ai-eight.vercel.app",  # Specific Vercel deployment
         "https://inboxprism-frontend.vercel.app",  # Primary Vercel deployment
     ],
     allow_credentials=True,

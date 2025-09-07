@@ -6,7 +6,7 @@ const nextConfig = {
       ...config.resolve.alias,
       '@': require('path').resolve(__dirname, './src'),
     };
-    
+
     return config;
   },
   // Enable experimental features for better TypeScript support
