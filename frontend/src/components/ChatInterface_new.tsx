@@ -3,6 +3,7 @@
 import { useState, useRef, useEffect } from 'react'
 import { useQuery } from '@tanstack/react-query'
 import { Send, Bot, User as UserIcon } from 'lucide-react'
+import { API_ENDPOINTS } from '@/lib/config'
 
 interface Message {
   id: string
@@ -24,10 +25,8 @@ interface Email {
   }
 }
 
-const API_BASE = 'http://localhost:8000'
-
 const fetchEmails = async (): Promise<{ emails: Email[] }> => {
-  const response = await fetch(`${API_BASE}/api/emails`)
+  const response = await fetch(API_ENDPOINTS.emails)
   if (!response.ok) throw new Error('Failed to fetch emails')
   return response.json()
 }

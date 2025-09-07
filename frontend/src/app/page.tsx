@@ -11,6 +11,7 @@ import ChatInterface from '@/components/ChatInterface'
 import TestimonialsSection from '@/components/TestimonialsSection'
 import PricingSection from '@/components/PricingSection'
 import LoginScreen from '@/components/LoginScreen'
+import { API_ENDPOINTS } from '@/lib/config'
 
 export default function Home() {
   const [activeTab, setActiveTab] = useState<'home' | 'emails' | 'chat' | 'stats'>('home')
@@ -69,7 +70,7 @@ function StatsView() {
   const { data: stats, isLoading: statsLoading } = useQuery({
     queryKey: ['stats'],
     queryFn: async () => {
-      const response = await fetch('http://localhost:8000/api/stats')
+      const response = await fetch(API_ENDPOINTS.stats)
       if (!response.ok) throw new Error('Failed to fetch stats')
       return response.json()
     },

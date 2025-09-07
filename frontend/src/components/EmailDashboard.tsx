@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import { RefreshCw, Download, Clock, User, Calendar, AlertCircle } from 'lucide-react'
 import { formatDistanceToNow } from 'date-fns'
+import { API_ENDPOINTS } from '@/lib/config'
 
 interface Email {
   id: number
@@ -30,23 +31,21 @@ interface StatsResponse {
   summary_rate: number
 }
 
-const API_BASE = 'http://localhost:8000'
-
 // API functions
 const fetchEmails = async (): Promise<EmailsResponse> => {
-  const response = await fetch(`${API_BASE}/api/emails`)
+  const response = await fetch(API_ENDPOINTS.emails)
   if (!response.ok) throw new Error('Failed to fetch emails')
   return response.json()
 }
 
 const fetchStats = async (): Promise<StatsResponse> => {
-  const response = await fetch(`${API_BASE}/api/stats`)
+  const response = await fetch(API_ENDPOINTS.stats)
   if (!response.ok) throw new Error('Failed to fetch stats')
   return response.json()
 }
 
 const fetchNewEmails = async (hours: number, summarize: boolean) => {
-  const response = await fetch(`${API_BASE}/api/fetch-emails`, {
+  const response = await fetch(API_ENDPOINTS.fetchEmails, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
