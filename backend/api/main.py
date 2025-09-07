@@ -174,6 +174,86 @@ async def summarize_email(email_id: int):
         logger.error(f"Error summarizing email {email_id}: {e}")
         raise HTTPException(status_code=500, detail=str(e))
 
+@app.post("/api/populate-test-data")
+async def populate_test_data():
+    """Populate database with test emails for frontend testing"""
+    try:
+        import uuid
+        from datetime import datetime, timedelta
+        
+        # Sample test emails
+        test_emails = [
+            {
+                "message_id": str(uuid.uuid4()),
+                "sender": "team@company.com",
+                "subject": "Weekly Team Meeting Notes",
+                "body": "Hi team, Here are the key points from our weekly meeting: 1. Project Alpha is on track for Q4 delivery 2. Need to review budget allocation for next quarter 3. Sarah will lead the new initiative. Please review and let me know if you have any questions.",
+                "received_at": datetime.now() - timedelta(hours=2)
+            },
+            {
+                "message_id": str(uuid.uuid4()),
+                "sender": "noreply@service.com",
+                "subject": "Your monthly report is ready",
+                "body": "Your monthly analytics report is now available. This month you received 150 emails, with an 85% open rate. Click here to view your detailed report and insights.",
+                "received_at": datetime.now() - timedelta(hours=5)
+            },
+            {
+                "message_id": str(uuid.uuid4()),
+                "sender": "client@business.com",
+                "subject": "Urgent: Project deadline extension request",
+                "body": "Hi, We need to discuss extending the project deadline by 2 weeks due to unexpected requirements changes. Can we schedule a call tomorrow? This is quite urgent as it affects our launch timeline.",
+                "received_at": datetime.now() - timedelta(hours=1)
+            }
+        ]
+        
+        processed_count = 0
+        for email in test_emails:
+            # Save email to database
+            email_id = db.save_email(
+                message_id=email['message_id'],
+                sender=email['sender'],
+                subject=email['subject'],
+                body=email['body'],
+                received_at=email['received_at']
+            )
+            
+            # Add AI summary
+            try:
+                if email['subject'] == "Weekly Team Meeting Notes":
+                    summary_data = {
+                        "topic": "Team Meeting Summary",
+                        "key_points": "Project Alpha on track, budget review needed, new initiative assignment",
+                        "action_required": "Review budget allocation, follow up on new initiative"
+                    }
+                elif email['subject'] == "Your monthly report is ready":
+                    summary_data = {
+                        "topic": "Monthly Analytics Report",
+                        "key_points": "150 emails received, 85% open rate, detailed report available",
+                        "action_required": "Review monthly report and insights"
+                    }
+                elif "Urgent" in email['subject']:
+                    summary_data = {
+                        "topic": "Project Deadline Extension",
+                        "key_points": "2-week extension request, requirements changes, affects launch timeline",
+                        "action_required": "Schedule call tomorrow, urgent response needed"
+                    }
+                
+                db.save_summary(email_id, **summary_data)
+                processed_count += 1
+                
+            except Exception as e:
+                logger.error(f"Error creating summary for test email {email_id}: {e}")
+        
+        return JSONResponse(content={
+            "message": "Test data populated successfully",
+            "emails_created": len(test_emails),
+            "summaries_created": processed_count
+        })
+        
+    except Exception as e:
+        logger.error(f"Error populating test data: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
 if __name__ == "__main__":
     import uvicorn
     uvicorn.run(app, host="0.0.0.0", port=8000)
