@@ -30,7 +30,8 @@ app.add_middleware(
         "http://localhost:3000",
         "http://localhost:5173",  # Local dev servers
         "https://*.vercel.app",   # Vercel deployments
-        "https://your-actual-app.vercel.app"  # Replace with your actual Vercel URL
+        "https://inboxai-tech.netlify.app",  # Your Netlify site
+        "https://*.netlify.app"   # All Netlify deployments
     ],
     allow_credentials=True,
     allow_methods=["*"],

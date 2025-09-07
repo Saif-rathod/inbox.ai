@@ -8,6 +8,7 @@
   NPM_FLAGS = "--legacy-peer-deps"
   
 # Backend URL: https://inbox-ai.onrender.com
+# Frontend URL: https://inboxai-tech.netlify.app
 
 [[plugins]]
   package = "@netlify/plugin-nextjs"
