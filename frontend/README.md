@@ -14,7 +14,7 @@ A Next.js frontend for the InboxPrism backend that provides AI-powered email sum
 ### Prerequisites
 
 - Node.js 18+ and npm
-- InboxPrism backend server running on port 8000
+- InboxPrism backend server (deployed at https://inbox-ai.onrender.com or running locally)
 
 ### Installation
 
@@ -40,7 +40,7 @@ The application will be available at `http://localhost:3000`
 
 ### Environment Variables
 
-- `NEXT_PUBLIC_API_URL`: Backend API URL (default: http://localhost:8000)
+- `NEXT_PUBLIC_API_URL`: Backend API URL (default: https://inbox-ai.onrender.com for production)
 
 ## Usage
 

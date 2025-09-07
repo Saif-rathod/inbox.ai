@@ -89,9 +89,9 @@ AZURE_OPENAI_ENDPOINT="your_azure_endpoint_here"
 
 The application will be available at:
 
-- **Frontend**: http://localhost:5173
-- **Backend API**: http://localhost:8000
-- **API Documentation**: http://localhost:8000/docs
+- **Frontend**: http://localhost:5173 (development) or https://inbox-ai-eight.vercel.app (production)
+- **Backend API**: http://localhost:8000 (development) or https://inbox-ai.onrender.com (production)
+- **API Documentation**: http://localhost:8000/docs (development) or https://inbox-ai.onrender.com/docs (production)/docs
 
 ### 5. Manual Setup (Alternative)
 
