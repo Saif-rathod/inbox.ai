@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect, useState, useCallback } from "react";
-import { cn } from "../../lib/utils";
+import { cn } from "./utils";
 
 export const InfiniteMovingCards = ({
   items,

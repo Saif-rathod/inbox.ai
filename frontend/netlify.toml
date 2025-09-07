@@ -5,6 +5,7 @@
 [build.environment]
   NEXT_PUBLIC_API_URL = "https://your-backend-url.onrender.com"
   NODE_VERSION = "18"
+  NPM_FLAGS = "--legacy-peer-deps"
 
 [[plugins]]
   package = "@netlify/plugin-nextjs"
