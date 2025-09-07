@@ -1,11 +1,20 @@
-// Production-first configuration for Netlify deployment
+// Production-first configuration for Vercel deployment
 const PRODUCTION_API_URL = 'https://inbox-ai.onrender.com'
 const LOCAL_API_URL = 'http://localhost:8000'
 
-// Use production URL as default, fallback to localhost only in development
-export const API_BASE_URL = process.env.NODE_ENV === 'development'
-  ? (process.env.NEXT_PUBLIC_API_URL || LOCAL_API_URL)
-  : (process.env.NEXT_PUBLIC_API_URL || PRODUCTION_API_URL)
+// Force production URL in all environments except explicit development
+const isExplicitDev = process.env.NODE_ENV === 'development' && typeof window !== 'undefined' && window.location.hostname === 'localhost'
+
+export const API_BASE_URL = isExplicitDev 
+  ? LOCAL_API_URL 
+  : PRODUCTION_API_URL
+
+// Debug logging (only in development)
+if (process.env.NODE_ENV === 'development' && typeof window !== 'undefined') {
+  console.log('🔧 API_BASE_URL:', API_BASE_URL)
+  console.log('🔧 isExplicitDev:', isExplicitDev)
+  console.log('🔧 hostname:', window.location.hostname)
+}
 
 export const API_ENDPOINTS = {
   emails: `${API_BASE_URL}/api/emails`,

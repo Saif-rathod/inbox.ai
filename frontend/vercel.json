@@ -1,6 +1,22 @@
 {
-    "framework": "nextjs",
-    "env": {
-        "NEXT_PUBLIC_API_URL": "https://your-backend-url.onrender.com"
+  "version": 2,
+  "name": "inboxprism-frontend",
+  "framework": "nextjs",
+  "builds": [
+    {
+      "src": "package.json",
+      "use": "@vercel/next"
     }
+  ],
+  "rewrites": [
+    {
+      "source": "/api/(.*)",
+      "destination": "https://inbox-ai.onrender.com/api/$1"
+    }
+  ],
+  "env": {
+    "NEXT_PUBLIC_API_URL": "https://inbox-ai.onrender.com",
+    "NODE_ENV": "production"
+  },
+  "regions": ["iad1"]
 }

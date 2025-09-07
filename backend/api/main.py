@@ -30,7 +30,9 @@ app.add_middleware(
         "http://localhost:3000",
         "http://localhost:5173",  # Local dev servers
         "https://inboxai-tech.netlify.app",  # Primary Netlify deployment
-        "https://*.netlify.app"   # Netlify staging/preview deployments
+        "https://*.netlify.app",   # Netlify staging/preview deployments
+        "https://*.vercel.app",    # Vercel deployments
+        "https://inboxprism-frontend.vercel.app",  # Primary Vercel deployment
     ],
     allow_credentials=True,
     allow_methods=["*"],
